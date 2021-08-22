@@ -3,15 +3,18 @@ package org.launchcode.secret_review.models;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class User extends AbstractEntity {
 
     @NotNull
+    @NotBlank
     private String username;
 
     @NotNull
+    @NotBlank
     private String pwHash;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
