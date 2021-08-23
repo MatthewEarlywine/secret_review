@@ -11,10 +11,36 @@
     <div class="container">
         <a href="index" class="navbar-brand">Secret Review</a>
         <a href="review"class="navbar-brand">Review</a>
+        <a href="logout"class="navbar-brand">Logout</a>
     </div>
 </nav>
 
 <h1>This is the Review Page</h1>
+<form class="col-lg-6 offset-lg-5">
+
+    <div class="form-group">
+        <label>Ticket:
+            <input th:field="${review.ticket}" class="form-control">
+        </label>
+        <p class="error" th:errors="${review.ticket}"></p>
+    </div>
+    <div class="form-group">
+        <label>Review:
+            <input th:field="${review.review}" class="form-control">
+        </label>
+        <p class="error" th:errors="${review.review}"></p>
+    </div>
+
+
+    <input type="submit" value="Create" class="btn btn-success">
+
+
+</form>
+
+<!--<tr th:each="$review : {reviews}" >-->
+<!--    <td th:text="${review.review}"></td>-->
+<!--</tr>-->
+
 
 </body>
 </html>
