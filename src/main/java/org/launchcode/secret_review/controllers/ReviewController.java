@@ -30,7 +30,7 @@ public class ReviewController {
     public String createReviews(@ModelAttribute @Valid Review newReview,
                                 Errors errors, Model model) {
         if(errors.hasErrors()) {
-            model.addAttribute("title", "Create Event");
+            model.addAttribute("title", "Create Review");
             return "review";
         }
 

@@ -9,14 +9,14 @@ public class Review extends AbstractEntity{
 
     @NotBlank
     @NotNull
-    private String ticket;
+    private String restaurantName;
 
     @NotBlank
     @NotNull
     private String review;
 
-    public Review(String ticket, String review) {
-        this.ticket = ticket;
+    public Review(String restaurantName, String review) {
+        this.restaurantName = restaurantName;
         this.review = review;
     }
 
@@ -24,11 +24,11 @@ public class Review extends AbstractEntity{
     }
 
     public String getTicket() {
-        return ticket;
+        return restaurantName;
     }
 
-    public void setTicket(String ticket) {
-        this.ticket = ticket;
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 
     public String getReview() {
@@ -42,7 +42,7 @@ public class Review extends AbstractEntity{
     @Override
     public String toString() {
         return "Review{" +
-                "ticket='" + ticket + '\'' +
+                "restaurant_name='" + restaurantName + '\'' +
                 ", review='" + review + '\'';
     }
 }
