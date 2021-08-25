@@ -23,7 +23,7 @@ public class Review extends AbstractEntity{
     public Review() {
     }
 
-    public String getTicket() {
+    public String getRestaurantName() {
         return restaurantName;
     }
 
