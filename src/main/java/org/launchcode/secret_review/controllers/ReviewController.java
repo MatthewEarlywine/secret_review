@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("review_index")
+@RequestMapping("/review/review_index")
 public class ReviewController {
 
     @Autowired
@@ -38,20 +38,20 @@ public class ReviewController {
     }
 
     //lives at /review/create
-    @GetMapping("create")
+    @GetMapping("/create")
     public String renderCreateReviewForm(Model model){
         model.addAttribute("title", "Create Review");
-        model.addAttribute(new Review());
+        model.addAttribute("review", new Review());
 
-        return "review/create";
+        return "create";
     }
 
-    @PostMapping("create")
-    public String processCreateReviewForm(@ModelAttribute @Valid Review newReview,
+    @PostMapping("/create")
+    public String processCreateReviewForm(@Valid @ModelAttribute("review") Review newReview,
                                           Errors errors, Model model){
         if (errors.hasErrors()){
             model.addAttribute("title", "Create Review");
-            return "review/create";
+            return "create";
         }
 
         reviewRepository.save(newReview);
