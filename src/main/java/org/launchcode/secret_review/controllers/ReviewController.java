@@ -47,7 +47,7 @@ public class ReviewController {
     }
 
     @PostMapping("/create")
-    public String processCreateReviewForm(@Valid @ModelAttribute Review newReview,
+    public String processCreateReviewForm(@ModelAttribute @Valid Review newReview,
                                           Errors errors, Model model){
         if (errors.hasErrors()){
             model.addAttribute("title", "Create Review");

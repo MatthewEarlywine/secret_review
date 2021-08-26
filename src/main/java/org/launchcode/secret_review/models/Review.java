@@ -35,7 +35,7 @@ public class Review extends AbstractEntity{
         return rating;
     }
 
-    public void setRating(String review) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 

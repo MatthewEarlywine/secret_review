@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title></title>
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8">
+    <title>Review</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body class="container">
 <header th:replace="fragments :: header"></header>
@@ -17,11 +18,11 @@
         <label>Category
             <select th:field="*{review.rating}" class="form-control">
                 <option th:value="0" disabled>### Select Rating ###</option>
-                <option th:value="1">*</option>
-                <option th:value="2">**</option>
-                <option th:value="3">***</option>
-                <option th:value="4">****</option>
-                <option th:value="5">*****</option>
+                <option th:value="*">*</option>
+                <option th:value="**">**</option>
+                <option th:value="***">***</option>
+                <option th:value="****">****</option>
+                <option th:value="*****">*****</option>
             </select>
         </label>
     </div>
