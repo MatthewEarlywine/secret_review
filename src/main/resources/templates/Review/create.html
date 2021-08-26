@@ -15,8 +15,8 @@
     </div>
     <div class="form-group">
         <label>Category
-            <select th:field="rating" class="form-control">
-                <option th:value="">### Select Rating ###</option>
+            <select th:field="*{review.rating}" class="form-control">
+                <option th:value="0" disabled>### Select Rating ###</option>
                 <option th:value="1">*</option>
                 <option th:value="2">**</option>
                 <option th:value="3">***</option>
