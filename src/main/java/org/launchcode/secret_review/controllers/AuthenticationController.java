@@ -1,5 +1,6 @@
 package org.launchcode.secret_review.controllers;
 
+
 import org.launchcode.secret_review.data.UserRepository;
 import org.launchcode.secret_review.models.User;
 import org.launchcode.secret_review.models.dto.LoginFormDTO;
@@ -22,6 +23,7 @@ public class AuthenticationController {
 
     @Autowired
     UserRepository userRepository;
+
 
     private static final String userSessionKey = "user";
 
@@ -78,7 +80,7 @@ public class AuthenticationController {
         }
 
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
-        userRepository.save(newUser);
+        userRepository.  save(newUser);
         setUserInSession(request.getSession(), newUser);
 
         return "redirect:";
