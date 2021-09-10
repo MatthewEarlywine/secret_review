@@ -1,5 +1,6 @@
-package org.launchcode.secret_review;
+package org.launchcode.secret_review.security;
 
+import org.launchcode.secret_review.security.AuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

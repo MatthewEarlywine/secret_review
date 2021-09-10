@@ -42,8 +42,8 @@ public class AuthenticationController {
         return user.get();
     }
 
-    private static void setUserInSession(HttpSession session, User user) {
-        session.setAttribute(userSessionKey, user.getId());
+    private static void setUserInSession(HttpSession session, User appEmployer) {
+        session.setAttribute(userSessionKey, appEmployer.getId());
     }
 
     @GetMapping("/register")
@@ -63,7 +63,7 @@ public class AuthenticationController {
             return "register";
         }
 
-        User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
+        User existingUser = userRepository.getUserByUsername(registerFormDTO.getUsername());
 
         if (existingUser != null) {
             errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
@@ -79,9 +79,9 @@ public class AuthenticationController {
             return "register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
-        userRepository.  save(newUser);
-        setUserInSession(request.getSession(), newUser);
+        User newAppEmployer = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+        userRepository.save(newAppEmployer);
+        setUserInSession(request.getSession(), newAppEmployer);
 
         return "redirect:";
     }
@@ -103,9 +103,9 @@ public class AuthenticationController {
             return "login";
         }
 
-        User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
+        User theAppEmployer = userRepository.getUserByUsername(loginFormDTO.getUsername());
 
-        if (theUser == null) {
+        if (theAppEmployer == null) {
             errors.rejectValue("username", "user.invalid", "The given username does not exist");
             model.addAttribute("title", "Log In");
             return "login";
@@ -113,13 +113,13 @@ public class AuthenticationController {
 
         String password = loginFormDTO.getPassword();
 
-        if (!theUser.isMatchingPassword(password)) {
+        if (!theAppEmployer.isMatchingPassword(password)) {
             errors.rejectValue("password", "password.invalid", "Invalid password");
             model.addAttribute("title", "Log In");
             return "login";
         }
 
-        setUserInSession(request.getSession(), theUser);
+        setUserInSession(request.getSession(), theAppEmployer);
 
         return "redirect:";
     }

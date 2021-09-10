@@ -1,4 +1,4 @@
-package org.launchcode.secret_review;
+package org.launchcode.secret_review.security;
 
 import org.launchcode.secret_review.controllers.AuthenticationController;
 import org.launchcode.secret_review.data.UserRepository;
@@ -44,10 +44,10 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
         }
 
         HttpSession session = request.getSession();
-        User user = authenticationController.getUserFromSession(session);
+        User appEmployer = authenticationController.getUserFromSession(session);
 
         // The user is logged in
-        if (user != null) {
+        if (appEmployer != null) {
             return true;
         }
 
