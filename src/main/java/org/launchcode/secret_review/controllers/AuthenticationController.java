@@ -42,8 +42,8 @@ public class AuthenticationController {
         return user.get();
     }
 
-    private static void setUserInSession(HttpSession session, User appEmployer) {
-        session.setAttribute(userSessionKey, appEmployer.getId());
+    private static void setUserInSession(HttpSession session, User user) {
+        session.setAttribute(userSessionKey, user.getId());
     }
 
     @GetMapping("/register")
@@ -79,9 +79,9 @@ public class AuthenticationController {
             return "register";
         }
 
-        User newAppEmployer = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
-        userRepository.save(newAppEmployer);
-        setUserInSession(request.getSession(), newAppEmployer);
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getRoles());
+        userRepository.save(newUser);
+        setUserInSession(request.getSession(), newUser);
 
         return "redirect:";
     }
@@ -103,9 +103,9 @@ public class AuthenticationController {
             return "login";
         }
 
-        User theAppEmployer = userRepository.getUserByUsername(loginFormDTO.getUsername());
+        User theUser = userRepository.getUserByUsername(loginFormDTO.getUsername());
 
-        if (theAppEmployer == null) {
+        if (theUser == null) {
             errors.rejectValue("username", "user.invalid", "The given username does not exist");
             model.addAttribute("title", "Log In");
             return "login";
@@ -113,13 +113,13 @@ public class AuthenticationController {
 
         String password = loginFormDTO.getPassword();
 
-        if (!theAppEmployer.isMatchingPassword(password)) {
+        if (!theUser.isMatchingPassword(password)) {
             errors.rejectValue("password", "password.invalid", "Invalid password");
             model.addAttribute("title", "Log In");
             return "login";
         }
 
-        setUserInSession(request.getSession(), theAppEmployer);
+        setUserInSession(request.getSession(), theUser);
 
         return "redirect:";
     }

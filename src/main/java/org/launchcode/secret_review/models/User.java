@@ -20,15 +20,18 @@ public class User extends AbstractEntity {
     @NotBlank
     private String pwHash;
 
+    private Set<Role> roles = new HashSet<>();
+
     private boolean enabled;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public User() {}
 
-    public User(String username, String password) {
+    public User(String username, String password, Set<Role> roles) {
         this.username = username;
         this.pwHash = encoder.encode(password);
+        this.roles = roles;
     }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -37,7 +40,6 @@ public class User extends AbstractEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
 
     public String getUsername() {
         return username;

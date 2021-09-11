@@ -38,14 +38,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/").hasAnyAuthority("REVIEWER", "ADMIN")
-                .antMatchers("/delete/**").hasAuthority("ADMIN")
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "/register").permitAll()
+                .antMatchers("/review/**").hasAnyAuthority("ADMIN", "REVIEWER")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll()
+                .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
                 .and()
-                .logout().permitAll()
+                .logout()
+                    .permitAll()
                 .and()
                 .exceptionHandling().accessDeniedPage("/403")
         ;
