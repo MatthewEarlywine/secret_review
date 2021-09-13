@@ -89,12 +89,12 @@ public class AuthenticationController {
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
         for (Role role : registerFormDTO.getRoles()) {
             if (role.getId() == 2){
-                System.out.println(role.getName());
-                System.out.println("cat");
+//                System.out.println(role.getName());
+//                System.out.println("cat");
                 newUser.addRole(roleRepository.getById(2));
             } else if (role.getId() == 1){
-                System.out.println(role.getName());
-                System.out.println("dog");
+//                System.out.println(role.getName());
+//                System.out.println("dog");
                 newUser.addRole(roleRepository.getById(1));
             }
         }
