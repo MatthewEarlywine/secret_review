@@ -26,9 +26,10 @@ public class User extends AbstractEntity {
 
     public User() {}
 
-    public User(String username, String password) {
+    public User(String username, String password, Set<Role> roles) {
         this.username = username;
         this.pwHash = encoder.encode(password);
+        this.roles = roles;
     }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -2,6 +2,7 @@ package org.launchcode.secret_review.controllers;
 
 
 import org.launchcode.secret_review.data.UserRepository;
+import org.launchcode.secret_review.models.Role;
 import org.launchcode.secret_review.models.User;
 import org.launchcode.secret_review.models.dto.LoginFormDTO;
 import org.launchcode.secret_review.models.dto.RegisterFormDTO;
@@ -12,11 +13,13 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class AuthenticationController {
@@ -47,7 +50,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/register")
-    public String displayRegistrationForm(Model model) {
+    public String displayRegistrationForm(@RequestParam(required = false) User user, Model model) {
         model.addAttribute(new RegisterFormDTO());
         model.addAttribute("title", "Register");
         return "register";
@@ -79,7 +82,8 @@ public class AuthenticationController {
             return "register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(),
+                registerFormDTO.getRoles());
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
 
