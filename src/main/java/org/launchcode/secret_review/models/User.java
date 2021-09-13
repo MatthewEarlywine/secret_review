@@ -20,16 +20,15 @@ public class User extends AbstractEntity {
     @NotBlank
     private String pwHash;
 
-    private boolean enabled;
+    private boolean enabled = true;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public User() {}
 
-    public User(String username, String password, Set<Role> roles) {
+    public User(String username, String password) {
         this.username = username;
         this.pwHash = encoder.encode(password);
-        this.roles = roles;
     }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -71,6 +70,8 @@ public class User extends AbstractEntity {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public void addRole(Role role){ this.roles.add(role);}
 
     public boolean isMatchingPassword(String password) {
         return encoder.matches(password, pwHash);

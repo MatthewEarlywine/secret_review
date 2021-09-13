@@ -1,6 +1,7 @@
 package org.launchcode.secret_review.controllers;
 
 
+import org.launchcode.secret_review.data.RoleRepository;
 import org.launchcode.secret_review.data.UserRepository;
 import org.launchcode.secret_review.models.Role;
 import org.launchcode.secret_review.models.User;
@@ -26,6 +27,9 @@ public class AuthenticationController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
 
 
     private static final String userSessionKey = "user";
@@ -82,8 +86,18 @@ public class AuthenticationController {
             return "register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(),
-                registerFormDTO.getRoles());
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+        for (Role role : registerFormDTO.getRoles()) {
+            if (role.getId() == 2){
+                System.out.println(role.getName());
+                System.out.println("cat");
+                newUser.addRole(roleRepository.getById(2));
+            } else if (role.getId() == 1){
+                System.out.println(role.getName());
+                System.out.println("dog");
+                newUser.addRole(roleRepository.getById(1));
+            }
+        }
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
 
