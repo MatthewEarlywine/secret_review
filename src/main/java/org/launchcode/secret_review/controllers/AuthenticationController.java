@@ -50,7 +50,7 @@ public class AuthenticationController {
     }
 
     private static void setUserInSession(HttpSession session, User user) {
-        session.setAttribute(userSessionKey, user.getId());
+        session.setAttribute(userSessionKey, user.getUser_id());
     }
 
     @GetMapping("/register")
@@ -86,19 +86,24 @@ public class AuthenticationController {
             return "register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getRoles());
         for (Role role : registerFormDTO.getRoles()) {
-            if (role.getId() == 2){
+            System.out.println(role.getRole_id());
+            if (role.getRole_id() == 2){
 //                System.out.println(role.getName());
 //                System.out.println("cat");
                 newUser.addRole(roleRepository.getById(2));
-            } else if (role.getId() == 1){
+                newUser.setRole_id(2);
+            } else if (role.getRole_id() == 1){
 //                System.out.println(role.getName());
 //                System.out.println("dog");
                 newUser.addRole(roleRepository.getById(1));
+                newUser.setRole_id(1);
             }
         }
         userRepository.save(newUser);
+        System.out.println("New user " + newUser.getUsername() + " has been saved.");
+        System.out.println(newUser.getRole_id());
         setUserInSession(request.getSession(), newUser);
 
         return "redirect:";
@@ -122,6 +127,7 @@ public class AuthenticationController {
         }
 
         User theUser = userRepository.getUserByUsername(loginFormDTO.getUsername());
+        System.out.println(loginFormDTO.getUsername());
 
         if (theUser == null) {
             errors.rejectValue("username", "user.invalid", "The given username does not exist");
@@ -137,7 +143,14 @@ public class AuthenticationController {
             return "login";
         }
 
+        System.out.println(theUser.getUsername());
+
         setUserInSession(request.getSession(), theUser);
+
+        System.out.println(theUser.getUsername());
+        System.out.println(loginFormDTO.getUsername());
+        System.out.println(theUser.getRole_id());
+
 
         return "redirect:";
     }

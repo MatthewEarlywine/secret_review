@@ -1,11 +1,17 @@
 package org.launchcode.secret_review.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "roles")
-public class Role extends AbstractEntity{
+public class Role {
+
+    @Id
+    @GeneratedValue
+    private int role_id;
 
     private String name;
 
@@ -14,6 +20,10 @@ public class Role extends AbstractEntity{
     }
 
     public Role(){}
+
+    public int getRole_id() {
+        return role_id;
+    }
 
     public String getName() {
         return name;

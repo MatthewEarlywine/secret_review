@@ -10,7 +10,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class User extends AbstractEntity {
+@Table(name = "user")
+public class User {
+
+    @Id
+    @GeneratedValue
+    private int user_id;
 
     @NotNull
     @NotBlank
@@ -24,12 +29,7 @@ public class User extends AbstractEntity {
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public User() {}
-
-    public User(String username, String password) {
-        this.username = username;
-        this.pwHash = encoder.encode(password);
-    }
+    private int role_id;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
@@ -38,6 +38,17 @@ public class User extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+
+    public User() {}
+
+    public User(String username, String password, Set<Role> roles) {
+        this.username = username;
+        this.pwHash = encoder.encode(password);
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
 
     public String getUsername() {
         return username;
@@ -61,6 +72,14 @@ public class User extends AbstractEntity {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public int getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
     }
 
     public Set<Role> getRoles() {
