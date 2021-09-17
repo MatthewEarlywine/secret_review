@@ -7,11 +7,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Review {
+public class Review extends AbstractEntity{
 
-    @Id
-    @GeneratedValue
-    private int review_id;
+//    @Id
+//    @GeneratedValue
+//    private int review_id;
 
     @NotBlank
     @NotNull
@@ -29,9 +29,9 @@ public class Review {
     public Review() {
     }
 
-    public int getReview_id() {
-        return review_id;
-    }
+//    public int getReview_id() {
+//        return review_id;
+//    }
 
     public String getRestaurantName() {
         return restaurantName;

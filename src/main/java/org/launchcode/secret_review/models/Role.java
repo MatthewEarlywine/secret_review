@@ -1,19 +1,20 @@
 package org.launchcode.secret_review.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "roles")
-public class Role {
+public class Role extends AbstractEntity{
 
-    @Id
-    @GeneratedValue
-    private int role_id;
+//    @Id
+//    @GeneratedValue
+//    private int role_id;
 
     private String name;
+
+    @OneToMany(mappedBy = "role")
+    private final List<User> users = new ArrayList<>();
 
     public Role(String name) {
         this.name = name;
@@ -21,9 +22,9 @@ public class Role {
 
     public Role(){}
 
-    public int getRole_id() {
-        return role_id;
-    }
+//    public int getRole_id() {
+//        return role_id;
+//    }
 
     public String getName() {
         return name;
@@ -32,4 +33,9 @@ public class Role {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
 }

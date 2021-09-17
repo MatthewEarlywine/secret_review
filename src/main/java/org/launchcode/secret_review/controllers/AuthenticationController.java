@@ -50,7 +50,7 @@ public class AuthenticationController {
     }
 
     private static void setUserInSession(HttpSession session, User user) {
-        session.setAttribute(userSessionKey, user.getUser_id());
+        session.setAttribute(userSessionKey, user.getId());
     }
 
     @GetMapping("/register")
@@ -86,24 +86,25 @@ public class AuthenticationController {
             return "register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getRoles());
-        for (Role role : registerFormDTO.getRoles()) {
-            System.out.println(role.getRole_id());
-            if (role.getRole_id() == 2){
-//                System.out.println(role.getName());
-//                System.out.println("cat");
-                newUser.addRole(roleRepository.getById(2));
-                newUser.setRole_id(2);
-            } else if (role.getRole_id() == 1){
-//                System.out.println(role.getName());
-//                System.out.println("dog");
-                newUser.addRole(roleRepository.getById(1));
-                newUser.setRole_id(1);
-            }
-        }
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+//        for (Role role : registerFormDTO.getRoles()) {
+//            System.out.println(role.getRole_id());
+//            if (role.getRole_id() == 2){
+////                System.out.println(role.getName());
+////                System.out.println("cat");
+//                newUser.addRole(roleRepository.getById(2));
+//                newUser.setRole_id(2);
+//            } else if (role.getRole_id() == 1){
+////                System.out.println(role.getName());
+////                System.out.println("dog");
+//                newUser.addRole(roleRepository.getById(1));
+//                newUser.setRole_id(1);
+//            }
+//        }
+        newUser.setRole(roleRepository.getById(2));
         userRepository.save(newUser);
         System.out.println("New user " + newUser.getUsername() + " has been saved.");
-        System.out.println(newUser.getRole_id());
+//        System.out.println(newUser.getRole_id());
         setUserInSession(request.getSession(), newUser);
 
         return "redirect:";
@@ -149,7 +150,7 @@ public class AuthenticationController {
 
         System.out.println(theUser.getUsername());
         System.out.println(loginFormDTO.getUsername());
-        System.out.println(theUser.getRole_id());
+//        System.out.println(theUser.getRole_id());
 
 
         return "redirect:";

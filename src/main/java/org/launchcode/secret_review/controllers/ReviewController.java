@@ -30,7 +30,7 @@ public class ReviewController {
             } else {
                 Review review = result.get();
                 model.addAttribute("title", "Reviews for: " + review.getRestaurantName());
-                model.addAttribute("reviews", review.getReview_id());
+                model.addAttribute("reviews", review.getId());
 
             }
         }
