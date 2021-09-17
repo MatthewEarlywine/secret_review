@@ -76,6 +76,10 @@ public class User extends AbstractEntity{
         this.role = role;
     }
 
+    public void setRoleByRoleId(Role role){
+        if (role.equals(role.getId()))
+    }
+
     public boolean isMatchingPassword(String password) {
         return encoder.matches(password, pwHash);
     }

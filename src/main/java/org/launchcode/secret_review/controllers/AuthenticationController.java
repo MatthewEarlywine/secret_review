@@ -1,7 +1,7 @@
 package org.launchcode.secret_review.controllers;
 
 
-import org.launchcode.secret_review.data.RoleRepository;
+//import org.launchcode.secret_review.data.RoleRepository;
 import org.launchcode.secret_review.data.UserRepository;
 import org.launchcode.secret_review.models.Role;
 import org.launchcode.secret_review.models.User;
@@ -27,10 +27,6 @@ public class AuthenticationController {
 
     @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    RoleRepository roleRepository;
-
 
     private static final String userSessionKey = "user";
 
@@ -101,7 +97,7 @@ public class AuthenticationController {
 //                newUser.setRole_id(1);
 //            }
 //        }
-        newUser.setRole(roleRepository.getById(2));
+        newUser.setRole();
         userRepository.save(newUser);
         System.out.println("New user " + newUser.getUsername() + " has been saved.");
 //        System.out.println(newUser.getRole_id());
