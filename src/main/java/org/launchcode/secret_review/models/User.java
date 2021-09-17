@@ -6,8 +6,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Entity
@@ -76,8 +74,10 @@ public class User extends AbstractEntity{
         this.role = role;
     }
 
-    public void setRoleByRoleId(Role role){
-        if (role.equals(role.getId()))
+    public void testFunction(int role_id){
+        if(role_id == 1){
+
+        }
     }
 
     public boolean isMatchingPassword(String password) {
