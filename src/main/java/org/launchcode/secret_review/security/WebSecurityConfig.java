@@ -43,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*", "/register").permitAll()
                 .antMatchers("/review/**").hasAnyAuthority("ADMIN", "REVIEWER")
+                // TODO -- include page visible only to ADMINs
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

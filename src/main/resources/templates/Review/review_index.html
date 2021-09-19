@@ -21,6 +21,11 @@
         <td th:text="${review.id}"></td>
         <td th:text="${review.restaurantName}"></td>
         <td th:text="${review.rating}"></td>
+        <td sec:authorize="hasAuthority('ADMIN')">
+            <form method="POST" action="/review/review_index"/>
+                <button type="submit" class="btn btn-primary" name="review_id" th:value="${review.id}">Delete</button>
+            </form>
+        </td>
     </tr>
 </table>
 
