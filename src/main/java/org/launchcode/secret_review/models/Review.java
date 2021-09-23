@@ -1,11 +1,17 @@
 package org.launchcode.secret_review.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Review extends AbstractEntity{
+
+//    @Id
+//    @GeneratedValue
+//    private int review_id;
 
     @NotBlank
     @NotNull
@@ -22,6 +28,10 @@ public class Review extends AbstractEntity{
 
     public Review() {
     }
+
+//    public int getReview_id() {
+//        return review_id;
+//    }
 
     public String getRestaurantName() {
         return restaurantName;

@@ -1,7 +1,10 @@
 package org.launchcode.secret_review.controllers;
 
 
+//import org.launchcode.secret_review.data.RoleRepository;
+import org.launchcode.secret_review.data.RoleRepository;
 import org.launchcode.secret_review.data.UserRepository;
+import org.launchcode.secret_review.models.Role;
 import org.launchcode.secret_review.models.User;
 import org.launchcode.secret_review.models.dto.LoginFormDTO;
 import org.launchcode.secret_review.models.dto.RegisterFormDTO;
@@ -12,11 +15,13 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class AuthenticationController {
@@ -24,6 +29,8 @@ public class AuthenticationController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    RoleRepository roleRepository;
 
     private static final String userSessionKey = "user";
 
@@ -47,7 +54,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/register")
-    public String displayRegistrationForm(Model model) {
+    public String displayRegistrationForm(@RequestParam(required = false) User user, Model model) {
         model.addAttribute(new RegisterFormDTO());
         model.addAttribute("title", "Register");
         return "register";
@@ -63,7 +70,7 @@ public class AuthenticationController {
             return "register";
         }
 
-        User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
+        User existingUser = userRepository.getUserByUsername(registerFormDTO.getUsername());
 
         if (existingUser != null) {
             errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
@@ -80,7 +87,24 @@ public class AuthenticationController {
         }
 
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+//        for (Role role : registerFormDTO.getRoles()) {
+//            System.out.println(role.getRole_id());
+//            if (role.getRole_id() == 2){
+////                System.out.println(role.getName());
+////                System.out.println("cat");
+//                newUser.addRole(roleRepository.getById(2));
+//                newUser.setRole_id(2);
+//            } else if (role.getRole_id() == 1){
+////                System.out.println(role.getName());
+////                System.out.println("dog");
+//                newUser.addRole(roleRepository.getById(1));
+//                newUser.setRole_id(1);
+//            }
+//        }
+        newUser.setRole(roleRepository.getById(2));
         userRepository.save(newUser);
+        System.out.println("New user " + newUser.getUsername() + " has been saved.");
+//        System.out.println(newUser.getRole_id());
         setUserInSession(request.getSession(), newUser);
 
         return "redirect:";
@@ -103,7 +127,8 @@ public class AuthenticationController {
             return "login";
         }
 
-        User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
+        User theUser = userRepository.getUserByUsername(loginFormDTO.getUsername());
+        System.out.println(loginFormDTO.getUsername());
 
         if (theUser == null) {
             errors.rejectValue("username", "user.invalid", "The given username does not exist");
@@ -119,7 +144,14 @@ public class AuthenticationController {
             return "login";
         }
 
+        System.out.println(theUser.getUsername());
+
         setUserInSession(request.getSession(), theUser);
+
+        System.out.println(theUser.getUsername());
+        System.out.println(loginFormDTO.getUsername());
+//        System.out.println(theUser.getRole_id());
+
 
         return "redirect:";
     }

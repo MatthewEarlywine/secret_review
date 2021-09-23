@@ -37,6 +37,14 @@ public class ReviewController {
         return "review/review_index";
     }
 
+    @PostMapping("review_index")
+    public String deleteReview(@RequestParam int review_id){
+        Review review = reviewRepository.getById(review_id);
+        reviewRepository.delete(review);
+
+        return "redirect:/review/review_index";
+    }
+
     //lives at /review/create
     @GetMapping("/create")
     public String renderCreateReviewForm(Model model){

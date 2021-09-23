@@ -1,13 +1,19 @@
 package org.launchcode.secret_review.models;
 
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+
 @Entity
-public class User extends AbstractEntity {
+public class User extends AbstractEntity{
+
+//    @Id
+//    @GeneratedValue
+//    private int user_id;
 
     @NotNull
     @NotBlank
@@ -16,6 +22,8 @@ public class User extends AbstractEntity {
     @NotNull
     @NotBlank
     private String pwHash;
+
+    private boolean enabled = true;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -26,8 +34,44 @@ public class User extends AbstractEntity {
         this.pwHash = encoder.encode(password);
     }
 
+    @ManyToOne(targetEntity = Role.class)
+    private Role role;
+
+
+//    public int getUser_id() {
+//        return user_id;
+//    }
+
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPwHash() {
+        return pwHash;
+    }
+
+    public void setPwHash(String pwHash) {
+        this.pwHash = pwHash;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public boolean isMatchingPassword(String password) {
