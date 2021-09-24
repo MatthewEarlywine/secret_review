@@ -50,7 +50,7 @@ public class AuthenticationController {
     }
 
     private static void setUserInSession(HttpSession session, User user) {
-        session.setAttribute(userSessionKey, user.getId());
+        session.setAttribute(userSessionKey, user.getUser_id());
     }
 
     @GetMapping("/register")

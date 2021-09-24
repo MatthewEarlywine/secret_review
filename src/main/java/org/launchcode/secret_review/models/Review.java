@@ -5,13 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
-public class Review extends AbstractEntity{
+public class Review {
 
-//    @Id
-//    @GeneratedValue
-//    private int review_id;
+    @Id
+    @GeneratedValue
+    private int review_id;
 
     @NotBlank
     @NotNull
@@ -29,9 +30,9 @@ public class Review extends AbstractEntity{
     public Review() {
     }
 
-//    public int getReview_id() {
-//        return review_id;
-//    }
+    public int getReview_id() {
+        return review_id;
+    }
 
     public String getRestaurantName() {
         return restaurantName;
@@ -54,5 +55,18 @@ public class Review extends AbstractEntity{
         return "Review{" +
                 "restaurant_name='" + restaurantName + '\'' +
                 ", rating='" + rating + '\'';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Review review = (Review) o;
+        return review_id == review.review_id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(review_id);
     }
 }
