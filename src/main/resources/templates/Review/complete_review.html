@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8">
+    <title>Review</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body class="container">
+<header th:replace="fragments :: header"></header>
+<form method="post" action="/review/complete">
+    <div class="form-group">
+        <label>Restaurant Name
+            <input th:field="${review.restaurantName}" class="form-control">
+        </label>
+        <p class="error" th:errors="${review.restaurantName}"></p>
+    </div>
+    <div class="form-group">
+        <label>Category
+            <select th:field="*{review.rating}" class="form-control">
+                <option th:value="0" disabled>### Select Rating ###</option>
+                <option th:value="1-star">*</option>
+                <option th:value="2-stars">**</option>
+                <option th:value="3-stars">***</option>
+                <option th:value="4-stars">****</option>
+                <option th:value="5-stars">*****</option>
+            </select>
+        </label>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create Review" class="btn btn-success">
+    </div>
+</form>
+
+</body>
+</html>

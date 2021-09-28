@@ -22,6 +22,8 @@ public class Review {
     @NotNull
     private String rating;
 
+    private boolean completed = false;
+
     public Review(String restaurantName, String rating) {
         this.restaurantName = restaurantName;
         this.rating = rating;
@@ -48,6 +50,14 @@ public class Review {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     @Override

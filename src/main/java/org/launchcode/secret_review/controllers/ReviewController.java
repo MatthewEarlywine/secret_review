@@ -46,23 +46,47 @@ public class ReviewController {
     }
 
     //lives at /review/create
-    @GetMapping("/create")
+    @GetMapping("/commission_review")
     public String renderCreateReviewForm(Model model){
-        model.addAttribute("title", "Create Review");
+        model.addAttribute("title", "Commission Review");
         model.addAttribute("review", new Review());
 
-        return "review/create";
+        return "review/commission_review";
     }
             //changing for commit
-    @PostMapping("/create")
+    @PostMapping("/commission_review")
     public String processCreateReviewForm(@ModelAttribute @Valid Review newReview,
                                           Errors errors, Model model){
         if (errors.hasErrors()){
             model.addAttribute("title", "Create Review");
-            return "review/create";
+            return "review/commission_review";
         }
 
         reviewRepository.save(newReview);
+        return "redirect:/review/review_index";
+    }
+
+    @GetMapping("/complete_review")
+    public String renderCompleteReviewForm(@RequestParam Integer review_Id, Model model){
+        model.addAttribute("title", "Complete Review");
+        model.addAttribute("review", reviewRepository.getById(review_Id));
+
+        return "review/complete_review";
+    }
+
+    @PostMapping("/complete_review")
+    public String processCompleteReviewForm(@RequestParam Integer review_Id,
+                                          Errors errors, Model model){
+        if (errors.hasErrors()){
+            model.addAttribute("title", "Complete Review");
+            return "review/complete";
+        }
+
+        Review review = reviewRepository.getById(review_Id);
+
+        review.setCompleted(true);
+
+        reviewRepository.save(review);
         return "redirect:/review/review_index";
     }
 }
