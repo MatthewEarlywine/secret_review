@@ -21,7 +21,9 @@ public class Review extends AbstractEntity{
     @NotNull
     private String rating;
 
-    public Review(String restaurantName, String rating) {
+    private String reviewText;
+
+    public Review(String restaurantName, String rating, String reviewText) {
         this.restaurantName = restaurantName;
         this.rating = rating;
     }
@@ -47,6 +49,14 @@ public class Review extends AbstractEntity{
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public String getReviewText() {
+        return reviewText;
+    }
+
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
     }
 
     @Override

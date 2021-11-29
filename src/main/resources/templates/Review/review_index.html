@@ -14,13 +14,15 @@
     <tr>
         <th>Review ID</th>
         <th>Restaurant Name</th>
-        <th>Description</th>
+        <th>Rating</th>
+        <th>Review</th>
     </tr>
     </thead>
     <tr th:each="review : ${reviews}">
         <td th:text="${review.id}"></td>
         <td th:text="${review.restaurantName}"></td>
         <td th:text="${review.rating}"></td>
+        <td th:text="${review.reviewText}"></td>
         <td sec:authorize="hasAuthority('ADMIN')">
             <form method="POST" action="/review/review_index"/>
                 <button type="submit" class="btn btn-primary" name="review_id" th:value="${review.id}">Delete</button>

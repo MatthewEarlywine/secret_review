@@ -12,11 +12,11 @@
     <div class="form-group">
         <label>Restaurant Name
             <input th:field="${review.restaurantName}" class="form-control">
-        </label>
+        </label>create
         <p class="error" th:errors="${review.restaurantName}"></p>
     </div>
     <div class="form-group">
-        <label>Category
+        <label>Rating
             <select th:field="*{review.rating}" class="form-control">
                 <option th:value="0" disabled>### Select Rating ###</option>
                 <option th:value="1-star">*</option>
@@ -26,6 +26,11 @@
                 <option th:value="5-stars">*****</option>
             </select>
         </label>
+    </div>
+    <div class="form-group">
+        <label>Review</label>
+        <textarea th:field="${review.reviewText}" class="form-control" id="review_text" name="review_text"
+                  style="max-width : 450px;" rows="4"></textarea>
     </div>
     <div class="form-group">
         <input type="submit" value="Create Review" class="btn btn-success">
