@@ -1,2 +1,18 @@
-1. Expand reviews from star rating to text description.
 2. Create Role for client users.
+    --Client-User creates ("Opens") record of given service ("Ticket").
+    --Reviewer-User selects Open Ticket to review (reviewed Ticket is "Closed").
+    --Privileges: Client cannot Close Ticket; Reviewer cannot Open Ticket.
+2a. Edit register.html page and AuthenticationController so registering User can choose to be Client or Reviewer.
+    -- register.html: radio choice label UserType;
+       if Client is checked, Reviewer must be unchecked, and in AuthControl "setRole(roleRepository.getById(3))".
+       if vice-versa, in AuthControl "setRole(roleRepository.getById(2))".
+2b. Split ReviewController between Opening Ticket and Closing Ticket functionality.
+
+
+
+
+
+
+
+
+3. Create sort functionality for list of reviews
