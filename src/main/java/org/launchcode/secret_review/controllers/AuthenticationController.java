@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -100,8 +101,11 @@ public class AuthenticationController {
 //                newUser.setRole_id(1);
 //            }
 //        }
-        if(document.getElementById)
-        newUser.setRole(roleRepository.getById(2));
+        if(Objects.equals(registerFormDTO.getUserType(), "client")){
+            newUser.setRole(roleRepository.getById(3));
+        } else if (Objects.equals(registerFormDTO.getUserType(), "reviewer")){
+            newUser.setRole(roleRepository.getById(2));
+        };
         userRepository.save(newUser);
         System.out.println("New user " + newUser.getUsername() + " has been saved.");
 //        System.out.println(newUser.getRole_id());

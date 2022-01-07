@@ -8,6 +8,8 @@ public class RegisterFormDTO extends LoginFormDTO {
 
     private Set<Role> roles;
 
+    private String userType;
+
     private String verifyPassword;
 
     private boolean enabled;
@@ -26,6 +28,14 @@ public class RegisterFormDTO extends LoginFormDTO {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public boolean isEnabled() {

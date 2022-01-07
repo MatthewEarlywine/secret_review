@@ -23,8 +23,8 @@
         <p class="error" th:errors="${registerFormDTO.username}"></p>
     </div>
     <div class="form-group">User Type
-        <label>Client<input type="radio" name="userType" id="client" value="client"></label>
-        <label>Reviewer<input type="radio" name="userType" id="reviewer" value="reviewer"></label>
+        <label>Client<input type="radio" th:field="${registerFormDTO.userType}" name="userType" id="client" value="client"></label>
+        <label>Reviewer<input type="radio" th:field="${registerFormDTO.userType}" name="userType" id="reviewer" value="reviewer"></label>
     </div>
     <div class="form-group">
         <label>Password
