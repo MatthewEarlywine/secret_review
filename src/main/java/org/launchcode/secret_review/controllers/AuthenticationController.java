@@ -100,6 +100,7 @@ public class AuthenticationController {
 //                newUser.setRole_id(1);
 //            }
 //        }
+        if(document.getElementById)
         newUser.setRole(roleRepository.getById(2));
         userRepository.save(newUser);
         System.out.println("New user " + newUser.getUsername() + " has been saved.");
