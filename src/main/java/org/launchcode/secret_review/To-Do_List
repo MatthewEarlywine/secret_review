@@ -3,10 +3,12 @@
     --Reviewer-User selects Open Ticket to review (reviewed Ticket is "Closed").
     --Privileges: Client cannot Close Ticket; Reviewer cannot Open Ticket.
 //2a. Edit register.html page and AuthenticationController so registering User can choose to be Client or Reviewer.
-    -- register.html: radio choice label UserType;
-       if Client is checked, Reviewer must be unchecked, and in AuthControl "setRole(roleRepository.getById(3))".
-       if vice-versa, in AuthControl "setRole(roleRepository.getById(2))".
+    //-- register.html: radio choice label UserType;
+    //   if Client is checked, Reviewer must be unchecked, and in AuthControl "setRole(roleRepository.getById(3))".
+    //   if vice-versa, in AuthControl "setRole(roleRepository.getById(2))".
 2b. Split ReviewController between Opening Ticket and Closing Ticket functionality.
+    --review_index.html: alter so reviewer-user has 'submit review' button on open reviews.
+
 2c. Initiate and verify privileges for Client and Reviewer Roles.
 
 
