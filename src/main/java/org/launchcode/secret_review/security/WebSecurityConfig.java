@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*", "/register").permitAll()
-                .antMatchers("/review/**").hasAnyAuthority("ADMIN", "REVIEWER")
+                .antMatchers("/review/**").hasAnyAuthority("ADMIN", "REVIEWER", "CLIENT")
                 // TODO -- include page visible only to ADMINs
                 .anyRequest().authenticated()
                 .and()
